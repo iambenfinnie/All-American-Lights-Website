@@ -52,13 +52,10 @@ img {
 }
 
 .nav-logo {
-    font-family: 'Raleway', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #ffffff;
-    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
 }
 
 .nav-links {
