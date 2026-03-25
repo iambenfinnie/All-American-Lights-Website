@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
@@ -18,12 +19,32 @@
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="#quote">Get A Quote</a></li>
         </ul>
+        <div class="nav-social">
+            <a href="https://www.facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
         <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-overlay"></div>
+    <!-- Hero Carousel -->
+    <section id="home" class="hero-carousel">
+        <div class="carousel-track">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1800&q=85')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1800&q=85')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1800&q=85')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1800&q=85')"></div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=1800&q=85')"></div>
+        </div>
+        <div class="carousel-overlay"></div>
+        <div class="carousel-dots">
+            <span class="dot active" onclick="goToSlide(0)"></span>
+            <span class="dot" onclick="goToSlide(1)"></span>
+            <span class="dot" onclick="goToSlide(2)"></span>
+            <span class="dot" onclick="goToSlide(3)"></span>
+            <span class="dot" onclick="goToSlide(4)"></span>
+        </div>
+        <button class="carousel-arrow prev" onclick="changeSlide(-1)">&#8249;</button>
+        <button class="carousel-arrow next" onclick="changeSlide(1)">&#8250;</button>
     </section>
 
     <!-- About Section -->
@@ -201,6 +222,32 @@
                 }
             });
         });
+
+        // Hero Carousel
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        let autoplayTimer;
+
+        function goToSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            clearInterval(autoplayTimer);
+            goToSlide(currentSlide + direction);
+            startAutoplay();
+        }
+
+        function startAutoplay() {
+            autoplayTimer = setInterval(() => goToSlide(currentSlide + 1), 5000);
+        }
+
+        startAutoplay();
 
         // Form submission
         function handleSubmit(e) {
